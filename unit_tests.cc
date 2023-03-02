@@ -6,7 +6,10 @@
 #include <vector>
 
 void test_vector_class() {
-    vector_class fv(3.0, 4.0, 0.0);  // make sure vector class is reading x,y,z values and computing magnitude and axis correctly
+
+    // make sure vector class is reading x,y,z values and computing magnitude and axis correctly
+
+    vector_class fv(3.0, 4.0, 0.0);  
     assert(fv.x == 3.0);
     assert(fv.y == 4.0);
     assert(fv.z == 0.0);
@@ -15,16 +18,17 @@ void test_vector_class() {
     std::cout << "vector_class working!!"<< std::endl;
     }
 
+// make sure fourvector class is reading energy values correctly
 void test_four_vector() {
   FourVector fv(3.0, 4.0, 0.0, 4.0);
   assert(fv.energy == 4.0);
   std::cout << "FourVector class working!!"<< std::endl;
 }
 
-
+// make sure data is read correctly from the input file
 void test_reader() {
     Reader reader;
-    std::vector<FourVector> data = reader.readData("testdata.txt"); // make sure data is read correctly from the input file
+    std::vector<FourVector> data = reader.readData("testdata.txt"); 
     assert(data.size() == 3);
     assert(data[0].getX() == 1.0);
     assert(data[0].getY() == 2.0);
@@ -42,15 +46,16 @@ void test_reader() {
 
 }
 
+// make sure data is being dumped into output file correctly
 void test_output(){
-    std::vector<double> bins = {1, 2, 3, 4, 5}; // make sure data is being dumped into output file correctly
+    std::vector<double> bins = {1, 2, 3, 4, 5}; 
     int num_bins = 5;
     double min_val = 0.0;
     double max_val = 10.0;
 
     output_histogram(bins, num_bins, min_val, max_val);
 
-    std::ifstream input_file("test.txt");
+    std::ifstream input_file("hist.txt");
     assert(input_file.is_open());
     double bin_center, bin_count;
     int count = 0;

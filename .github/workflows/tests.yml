@@ -26,5 +26,6 @@ jobs:
     - name: Run tests
       run: |
         g++ unit_tests.cc -o tests
+        ./tests
 
 

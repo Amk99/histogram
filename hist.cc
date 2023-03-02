@@ -11,7 +11,8 @@ class vector_class {
 public:
     double x, y, z;
     
-    vector_class(double x_, double y_, double z_) : x(x_), y(y_), z(z_) {} // constructor
+    // constructor
+    vector_class(double x_, double y_, double z_) : x(x_), y(y_), z(z_) {} 
 
     double magnitude() const {        
         return std::sqrt(x * x + y * y + z * z);
@@ -21,7 +22,8 @@ public:
         return std::sqrt(x * x + y * y);
     }
 
-    double angle(const vector_class& other) const {     // calculate angle between two vectors
+    // calculate angle between two vectors
+    double angle(const vector_class& other) const {     
         double dot = x * other.x + y * other.y + z * other.z;
         double mag = magnitude() * other.magnitude();
         return std::acos(dot / mag);
@@ -37,7 +39,7 @@ public:
 
     // Accessors to access x,y,z values for testing
     double getE() const { return energy; }
-    double getX() const { return x; }      // define getX() function
+    double getX() const { return x; }     
     double getY() const { return y; }
     double getZ() const { return z; }
 
@@ -45,6 +47,7 @@ public:
     double mass() const {
         return std::sqrt(energy * energy - x * x - y * y - z * z);
     }
+    // To extend any functionality new fuction can be added here
 };
 
 
@@ -54,6 +57,8 @@ public:
     std::vector<FourVector> readData(std::string filename) {
         std::vector<FourVector> data; 
         std::ifstream file(filename); // open the file
+        
+        //make sure the file is valid
         if (!file.is_open()) {
             std::cerr << "Error: could not open file " << filename << std::endl;
             return data;
@@ -116,7 +121,9 @@ public:
 
 // Output system to dump histogram data into an outtput file
 void output_histogram(const std::vector<double>& bins, int num_bins, double min_val, double max_val) {
+    // calculate bin width
     double bin_width = (max_val - min_val) / num_bins;
+    // creating output file
     std::ofstream output_file("hist.txt");
     for (int i = 0; i < num_bins; i++) {
         double bin_center = min_val + (i + 0.5) * bin_width;
@@ -128,6 +135,7 @@ void output_histogram(const std::vector<double>& bins, int num_bins, double min_
 
 
 int main(int argc, char* argv[]) {
+    // check for properr useage
     if (argc < 6) {
         std::cerr << "Usage: " << argv[0] << " datafile distribution_name num_bins min_val max_val" << std::endl;
         return 1;
@@ -139,11 +147,15 @@ int main(int argc, char* argv[]) {
     double min_val = std::stod(argv[4]);
     double max_val = std::stod(argv[5]);
 
-    Data data;
-    data.read(datafile);
 
+    // read the data and convert into fourvector class
+    Data data;
+    data.read(datafile); 
+
+    // create the distribution
     auto bins = data.distribution(distribution_name, num_bins, min_val, max_val);
 
+    // dump data into output file
     output_histogram(bins, num_bins, min_val, max_val);
 
     return 0;

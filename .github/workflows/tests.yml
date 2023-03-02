@@ -20,10 +20,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up C++ compiler
-      uses: actions/setup-cpp@v1
-      with:
-        compiler: ${{ matrix.compiler }}
 
 
 

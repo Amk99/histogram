@@ -1,20 +1,35 @@
-name: C/C++ CI
+name: C++ Unit Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        compiler: [g++]
+
     steps:
-    - uses: actions/checkout@v3
-    - name: run tests
-      run: g++ unit_tests.cc -o tests
-    - name: run
-      run: ./tests
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up C++ compiler
+      uses: actions/setup-cpp@v1
+      with:
+        compiler: ${{ matrix.compiler }}
+
+
+
+    - name: Run tests
+      run: |
+        g++ unit_tests.cc -o tests
+        ./tests
+
 

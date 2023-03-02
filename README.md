@@ -14,7 +14,10 @@ g++ hist.cc -o hist
 ```
 output file named hist.txt will be generted.
 
-#### To run tests
+### Manual Testing
+
+Unit tests are triggerd for every push or pull request in this repo.For manual testing on local machine:
+
 ```
 g++ unit_tests.cc -o test
 ./test

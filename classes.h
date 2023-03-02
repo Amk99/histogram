@@ -1,4 +1,5 @@
-// Import file for unit tests with class definitions
+// Import file 
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -36,6 +37,7 @@ class FourVector : public vector_class {
 public:
     double energy;
 
+    // constructor
     FourVector(double x_, double y_, double z_, double energy_) : vector_class(x_, y_, z_), energy(energy_) {}
 
     // Accessors to access x,y,z values for testing

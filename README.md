@@ -12,7 +12,7 @@ distributions of pT, pX, pY, pZ, energy and mass. Where mass is calculated as sq
 g++ hist.cc -o hist
 ./hist <datafile> <distribution_name> <num_bins> <min_val> <max_val>
 ```
-output file named hist.txt will be generted.
+output file named hist.txt will be generted
 
 ### Manual Testing
 
